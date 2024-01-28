@@ -1,0 +1,72 @@
+server {
+    set $app_dir /srv/app;
+    set $app_dir_layout $app_dir/layout;
+
+    listen 8080;
+    server_name $BASE_URL;
+    charset utf-8;
+    root $app_dir/public;
+
+    location / {
+        fancyindex on;
+        fancyindex_default_sort name;
+        # fancyindex_case_sensitive on; # Не работает
+        fancyindex_directories_first on;
+        fancyindex_exact_size off;
+        fancyindex_show_path on;
+        fancyindex_show_dotfiles off;
+        fancyindex_ignore "#recycle";
+        fancyindex_hide_symlinks on;
+        fancyindex_hide_parent_dir off;
+        fancyindex_localtime on;
+        fancyindex_time_format "%F %R";
+        fancyindex_header /layout/header.html;
+        fancyindex_footer /layout/footer.html;
+        # fancyindex_css_href /layout/styles/style.css local; # Не работает
+        try_files $uri $uri/ =404;
+    }
+
+    location /layout {
+        root $app_dir;
+        autoindex off;
+        fancyindex off;
+        try_files $uri $uri/ =404;
+    }
+
+    location = /robots.txt {
+        root $app_dir/settings;
+    }
+
+    location = /favicon.ico {
+        root $app_dir_layout;
+    }
+
+    # Страницы ошибок
+    error_page 404 /404.html;
+    location = /404.html {
+        root $app_dir_layout/errors;
+    }
+
+    error_page 500 /500.html;
+    location = /500.html {
+        root $app_dir_layout/errors;
+    }
+    error_page 502 /502.html;
+    location = /502.html {
+        root $app_dir_layout/errors;
+    }
+    error_page 503 /503.html;
+    location = /503.html {
+        root $app_dir_layout/errors;
+    }
+    error_page 504 /504.html;
+    location = /504.html {
+        root $app_dir_layout/errors;
+    }
+}
+
+server {
+    listen 8080 default_server;
+    server_name _;
+    return 444;
+}

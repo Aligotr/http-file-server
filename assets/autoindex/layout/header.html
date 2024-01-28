@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>HTTP File Server</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="stylesheet" href="/layout/styles/fonts.css" />
+    <link rel="stylesheet" href="/layout/styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="/layout/styles/main.css" />
+    <link rel="stylesheet" href="/layout/styles/style.css" />
+
+    <script src="/layout/js/jquery.min.js"></script>
+    <script src="/layout/js/script.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header container">
+        <div class="row row-cols-1 row-cols-md-2 justify-content-md-between">
+          <div class="col d-flex align-items-center">
+            <h4 class="header-title">HTTP File Server</h4>
+          </div>
+          <div class="col d-md-flex align-items-center justify-content-md-end">
+            <form id="search-form">
+              <input id="searchBox" class="form-control" type="search" placeholder="Поиск по странице" />
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="autoindex" class="container">
+        <hr class="breadcrumb-seperator-top" />
+        <div id="breadcrumb"></div>
+        <hr class="breadcrumb-seperator-bottom" />
+        <div id="wrapper-table-list" class="table-responsive">

@@ -1,0 +1,112 @@
+/* Защита от мерцания элементов при замене DOM */
+#autoindex,
+#footer {
+  display: none;
+}
+
+/* table#list */
+table#list {
+  min-width: 100%;
+  font-size: 1.1rem;
+}
+
+table#list a:not([href*="/"]) {
+  color: white;
+}
+
+table#list thead th:not(:first-child),
+table#list tbody td:not(:first-child) {
+  text-align: right;
+  padding-left: 40px;
+}
+
+@media (max-width: 768px) {
+  table#list {
+    width: max-content;
+    margin-bottom: 1rem;
+  }
+
+  table#list td:not(:first-child) {
+    line-height: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  table#list {
+    width: 100%;
+  }
+
+  table#list td {
+    line-height: 1.7;
+  }
+
+  table#list a {
+    word-break: break-all;
+  }
+
+  table#list th.name-header-table-list {
+    width: 60%;
+  }
+
+  table#list th.size-header-table-list {
+    width: 20%;
+  }
+
+  table#list th.date-header-table-list {
+    width: 20%;
+  }
+}
+
+/* Header */
+.header-title {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .header > .row > .col:first-child {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header > .row > .col {
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Breadcrumb */
+#breadcrumb {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.breadcrumb-seperator-top {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb-seperator-bottom {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Utilities */
+#btn-up {
+  display: none;
+  position: fixed;
+  width: 3rem;
+  height: 3rem;
+  right: 1.8rem;
+  bottom: 20px;
+  padding: 0px;
+  border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+  #btn-up {
+    right: 3rem;
+  }
+}
