@@ -64,6 +64,7 @@ server {
     location = /404.html {
         root $app_dir_layout/errors;
     }
+
     error_page 500 /500.html;
     location = /500.html {
         root $app_dir_layout/errors;
