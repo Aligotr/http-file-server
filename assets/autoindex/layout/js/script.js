@@ -1,33 +1,34 @@
-idAutoindexTable = "table#list"
+const idAutoindexTable = "table#list"
+const currentPathURL = window.location.pathname
 
 // Перенос текста заголовка в шапку
 // Появление текущего пути зависит от опции в Nginx: fancyindex_show_path on
 function breadcrumb() {
-  var textNodes = $("#wrapper-table-list")
+  const textNodes = $("#wrapper-table-list")
     .contents()
     .filter(function () {
       return this.nodeType == 3 // Node.TEXT_NODE
     })
-  var combinedText = textNodes.text()
+  const combinedText = textNodes.text()
   textNodes.remove()
-  var currentPath = $.trim(combinedText)
-  var homeIconSvg =
+  const currentPath = $.trim(combinedText)
+  const homeIconSvg =
     '<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" class="bi bi-house-fill" viewBox="0 2 16 16"> <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/> </svg>'
 
-  var segments = currentPath.split("/")
+  const segments = currentPath.split("/")
 
-  var currentURL = window.location.href
-  var query = currentURL.substring(currentURL.lastIndexOf("/") + 1)
-  var queryCheck = query.startsWith("?")
+  const currentURL = window.location.href
+  const query = currentURL.substring(currentURL.lastIndexOf("/") + 1)
+  const queryCheck = query.startsWith("?")
 
-  var segmentsURL = ""
+  let segmentsURL = ""
 
-  var breadcrumb = segments.map(function (segment, index) {
+  const breadcrumb = segments.map(function (segment, index) {
     segmentsURL += segment + "/"
 
     // Получение параметров запроса страницы
-    var resultURL = segmentsURL
-    var resultURLHome = "/"
+    let resultURL = segmentsURL
+    let resultURLHome = "/"
     if (queryCheck) {
       resultURL = segmentsURL + query
       resultURLHome += query
@@ -52,10 +53,10 @@ function breadcrumb() {
 // Замена имён ссылок в таблице на полные
 function fullLinksTableList(rowTableList) {
   $(rowTableList + " td.link a").each(function () {
-    var linkArray = $(this)
-    var linkHrefURIArray = linkArray.attr("href")
-    var linkHrefArray = decodeURI(linkHrefURIArray)
-    var linkTextArray = linkArray.text()
+    const linkArray = $(this)
+    const linkHrefURIArray = linkArray.attr("href")
+    const linkHrefArray = decodeURI(linkHrefURIArray)
+    const linkTextArray = linkArray.text()
 
     if (linkTextArray.endsWith("..>")) {
       linkArray.text(linkHrefArray)
@@ -65,7 +66,7 @@ function fullLinksTableList(rowTableList) {
 
 // Замена названий размеров файлов и папок
 function friendlyNameSize(rowTableList) {
-  var sizeName = {
+  const sizeName = {
     B: "Б",
     KiB: "Кб",
     MiB: "Мб",
@@ -74,8 +75,8 @@ function friendlyNameSize(rowTableList) {
   }
 
   $(rowTableList + " td.size").each(function () {
-    var text = $(this).text().split(" ")
-    var key = text[text.length - 1]
+    const text = $(this).text().split(" ")
+    const key = text[text.length - 1]
     if (sizeName[key]) {
       text[text.length - 1] = sizeName[key]
       $(this).text(text.join(" "))
@@ -87,7 +88,6 @@ function friendlyNameSize(rowTableList) {
 // Появление зависит от опции в Nginx: fancyindex_hide_parent_dir off
 function nameParentDirLink(presentParentDirLink, firstRowTableList) {
   if (presentParentDirLink) {
-    var currentPathURL = window.location.pathname
     if (currentPathURL != "/") {
       firstRowTableList.text("../")
     }
@@ -96,14 +96,14 @@ function nameParentDirLink(presentParentDirLink, firstRowTableList) {
 
 // Замена заголовков таблицы
 function headerTable() {
-  var nameIconSorting = "↓"
-  var sizeIconSorting = "↓"
-  var dateIconSorting = "↓"
+  let nameIconSorting = "↓"
+  let sizeIconSorting = "↓"
+  let dateIconSorting = "↓"
 
-  var nameURLSorting = "?C=N&O=D"
-  var sizeURLSorting = "?C=S&O=D"
-  var dateURLSorting = "?C=M&O=D"
-  var currentUrl = window.location.href
+  let nameURLSorting = "?C=N&O=D"
+  let sizeURLSorting = "?C=S&O=D"
+  let dateURLSorting = "?C=M&O=D"
+  const currentUrl = window.location.href
 
   if (currentUrl.endsWith("/?C=N&O=D")) {
     nameIconSorting = "↑"
@@ -151,15 +151,15 @@ function headerTable() {
 // Поиск
 function search(rowTableList) {
   $("#search-form").on("input", function () {
-    var target = $("#searchBox").val()
+    const target = $("#searchBox").val()
     filter(target)
   })
 
   function filter(target) {
     $(rowTableList).each(function () {
-      var rowArray = $(this)
-      var linkArray = $(this).find("td.link a").text()
-      var searchArray = decodeURI(linkArray).toLowerCase()
+      const rowArray = $(this)
+      const linkArray = $(this).find("td.link a").text()
+      const searchArray = decodeURI(linkArray).toLowerCase()
       if (searchArray.indexOf(target.toLowerCase()) > -1) {
         rowArray.show()
       } else {
@@ -171,7 +171,7 @@ function search(rowTableList) {
 
 // Кнопка "Наверх"
 function btnUp() {
-  let btnTop = document.getElementById("btn-up")
+  const btnTop = document.getElementById("btn-up")
   window.onscroll = function () {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
       btnTop.style.display = "block"
@@ -186,12 +186,12 @@ function btnUp() {
 }
 
 //
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", () => {
   // Проверка наличия ссылки на родительскую папку в первой строке таблицы
-  var parentDirTitle = "Parent directory/"
-  var firstRowTableList = $(idAutoindexTable + " tbody tr:first-child td.link a")
-  var presentParentDirLink = firstRowTableList.text() === parentDirTitle ? true : false
-  var rowTableList = presentParentDirLink
+  const parentDirTitle = "Parent directory/"
+  const firstRowTableList = $(idAutoindexTable + " tbody tr:first-child td.link a")
+  const presentParentDirLink = firstRowTableList.text() === parentDirTitle ? true : false
+  const rowTableList = presentParentDirLink
     ? idAutoindexTable + " tbody tr:not(:first-child)"
     : idAutoindexTable + " tbody tr"
 
@@ -219,9 +219,7 @@ $(document).ready(function () {
 
   // Поиск
   search(rowTableList)
-})
 
-window.addEventListener("load", function () {
   // Кнопка "Наверх"
   // Только на указанных устройствах
   if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
