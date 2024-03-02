@@ -2,7 +2,7 @@ const idAutoindexTable = "table#list"
 const currentPathURL = window.location.pathname
 
 // Перенос текста заголовка в шапку
-// Появление текущего пути зависит от опции в Nginx: fancyindex_show_path on
+// Появление текущего пути зависит от опции в Nginx: fancyindex_show_path = on
 function breadcrumb() {
   const textNodes = $("#wrapper-table-list")
     .contents()
