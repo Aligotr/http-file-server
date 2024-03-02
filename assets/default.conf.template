@@ -15,7 +15,7 @@ server {
         fancyindex_exact_size off;
         fancyindex_show_path on;
         fancyindex_show_dotfiles off;
-        fancyindex_ignore "#recycle";
+        fancyindex_ignore "(?i)#recycle" "(?i)#private";
         fancyindex_hide_symlinks on;
         fancyindex_hide_parent_dir off;
         fancyindex_localtime on;
@@ -24,6 +24,20 @@ server {
         fancyindex_footer /layout/footer.html;
         # fancyindex_css_href /layout/styles/style.css local; # Не работает
         try_files $uri $uri/ =404;
+
+        location ~* "^/#private/$" {
+            autoindex off;
+            fancyindex off;
+            deny all;
+            return 403;
+        }
+
+        location ~* "^/#recycle/$" {
+            autoindex off;
+            fancyindex off;
+            deny all;
+            return 403;
+        }
     }
 
     location /layout {
@@ -42,11 +56,14 @@ server {
     }
 
     # Страницы ошибок
+    error_page 403 /403.html;
+    location = /403.html {
+        root $app_dir_layout/errors;
+    }
     error_page 404 /404.html;
     location = /404.html {
         root $app_dir_layout/errors;
     }
-
     error_page 500 /500.html;
     location = /500.html {
         root $app_dir_layout/errors;
