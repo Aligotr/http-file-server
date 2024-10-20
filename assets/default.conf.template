@@ -25,6 +25,11 @@ server {
         # fancyindex_css_href /layout/styles/style.css local; # Не работает
         try_files $uri $uri/ =404;
 
+        location ~* "^/#hidden/$" {
+            autoindex off;
+            fancyindex off;
+        }
+
         location ~* "^/#private/$" {
             autoindex off;
             fancyindex off;

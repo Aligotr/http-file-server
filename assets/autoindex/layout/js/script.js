@@ -185,6 +185,18 @@ function btnUp() {
   })
 }
 
+// Удалить строку таблицы
+function removeElement(rowTableList, target) {
+  $(rowTableList).each(function () {
+    const rowArray = $(this)
+    const linkArray = $(this).find("td.link a").text()
+    const searchArray = decodeURI(linkArray).toLowerCase()
+    if (searchArray.indexOf(target.toLowerCase()) > -1) {
+      rowArray.remove()
+    }
+  })
+}
+
 //
 document.addEventListener("DOMContentLoaded", () => {
   // Проверка наличия ссылки на родительскую папку в первой строке таблицы
@@ -194,6 +206,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const rowTableList = presentParentDirLink
     ? idAutoindexTable + " tbody tr:not(:first-child)"
     : idAutoindexTable + " tbody tr"
+
+  // Удалить строку таблицы, содержащую ссылку с искомой фразой
+  removeElement(rowTableList, "#Hidden/")
 
   // Перенос текста заголовка в шапку
   breadcrumb()
