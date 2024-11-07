@@ -1,7 +1,7 @@
 ##############################################################
 ##########     Сборка вспомогательных элементов     ##########
 ##############################################################
-FROM nginx:alpine-slim AS Builder
+FROM nginx:alpine-slim AS builder
 
 # Установка исходного кода Nginx и модулей
 RUN \
@@ -47,8 +47,7 @@ RUN \
 FROM nginxinc/nginx-unprivileged:alpine-slim
 
 # Метки
-ARG PROJECT_NAME="empty"
-LABEL project-name=$PROJECT_NAME
+LABEL project-name="http-file-server"
 LABEL maintainer="Aligotr"
 
 # Переменные
@@ -61,7 +60,7 @@ WORKDIR $HOME
 #
 USER root
 
-COPY --from=Builder /usr/local/nginx/modules /etc/nginx/modules/
+COPY --from=builder /usr/local/nginx/modules /etc/nginx/modules/
 
 RUN \
   echo "--- Установка зависимостей и дополнительных программ ---"; \

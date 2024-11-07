@@ -2,16 +2,13 @@
 set -eu
 
 # Переменные
-DEVELOPER=aligotr
-PROJECT_NAME=http-file-server
+DEVELOPER="aligotr"
+PROJECT_NAME="http-file-server"
 CONTAINER_ID=""
-get_container_id() {
-  CONTAINER_ID=$(docker ps --all --quiet --filter "label=project-name=$PROJECT_NAME")
-}
 
 # Помощь
 help() {
-  cat <<EOF
+cat <<EOF
 ────────────────────────────────────
                              O o
                                 o
@@ -32,9 +29,14 @@ help() {
 EOF
 }
 
-# Функции
+# Функции сборки
 build() {
-  docker build -t ${DEVELOPER}/${PROJECT_NAME}:latest --build-arg PROJECT_NAME=${PROJECT_NAME} ./
+  docker build -t ${DEVELOPER}/${PROJECT_NAME}:latest ./
+}
+
+# Вспомогательные функции
+default() {
+  build
 }
 
 logs() {
@@ -86,18 +88,20 @@ remove() {
 }
 
 # Утилиты
-default() {
-  build
-}
-
 prompt() {
   read -p "Продолжить выполнение? [y/n] " choice
   case $choice in
   [Yy]*)
     break
     ;;
-  *) exit ;;
+  *)
+    exit
+    ;;
   esac
+}
+
+get_container_id() {
+  CONTAINER_ID=$(docker ps --all --quiet --filter "label=project-name=$PROJECT_NAME")
 }
 
 # Сопоставление: Аргумент-Функция

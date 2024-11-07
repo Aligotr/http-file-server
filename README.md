@@ -27,7 +27,6 @@ HTTP-File-Server - Редизайн для Nginx Fancy Index (autoindex).
 `docker-compose.yml`
 
 ```
-version: "3"
 services:
   http-file-server:
     # Безопасность
@@ -39,7 +38,6 @@ services:
     container_name: http-file-server
     image: aligotr/http-file-server:latest
     restart: unless-stopped
-    # hostname: files.local
     ports:
       - 8080:8080
     # volumes:
