@@ -1,9 +1,5 @@
 # HTTP-File-Server
 
-Редакция от: 2024-01-28
-
-#Docker #Матчасть/Сеть
-
 ## Описание
 
 HTTP-File-Server - Редизайн для Nginx Fancy Index (autoindex).
