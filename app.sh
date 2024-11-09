@@ -4,11 +4,12 @@ set -eu
 # Переменные
 DEVELOPER="aligotr"
 PROJECT_NAME="http-file-server"
+VERSION="1.0.0"
 CONTAINER_ID=""
 
 # Функции сборки
 build() {
-  docker build -t ${DEVELOPER}/${PROJECT_NAME}:latest ./
+  docker build -t ${DEVELOPER}/${PROJECT_NAME}:latest -t ${DEVELOPER}/${PROJECT_NAME}:${VERSION} ./
 }
 
 # Вспомогательные функции
@@ -91,7 +92,7 @@ cat <<EOF
 |""""""|_|""""""|_|""""""|_|======}
 '-0--0-'"'-0--0-'"'-0--0-'"'000--o\.
 ────────────────────────────────────
-Проект: $PROJECT_NAME
+Проект: ${PROJECT_NAME}
 Тип: docker
 ────────────────────────────────────
 Сборка образа: build
