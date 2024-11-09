@@ -82,9 +82,8 @@ get_container_id() {
   CONTAINER_ID=$(docker ps --all --quiet --filter "label=project-name=$PROJECT_NAME")
 }
 
-
 help() {
-cat <<EOF
+  cat <<EOF
 ────────────────────────────────────
                              O o
                                 o
@@ -106,7 +105,8 @@ ${clean_details}
 EOF
 }
 
-clean_details=$(cat <<EOF
+clean_details=$(
+  cat <<EOF
 - Остановленные контейнеры;
 - Неиспользуемые образы;
 - Неиспользуемые тома;
