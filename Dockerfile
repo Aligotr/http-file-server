@@ -1,7 +1,7 @@
 ##############################################################
 ##########     Сборка вспомогательных элементов     ##########
 ##############################################################
-FROM nginx:alpine-slim AS builder
+FROM nginx:1.27-alpine-slim AS builder
 
 # Установка исходного кода Nginx и модулей
 RUN \
@@ -44,7 +44,7 @@ RUN \
 ##########         Сборка основного образа          ##########
 ##############################################################
 
-FROM nginxinc/nginx-unprivileged:alpine-slim
+FROM nginxinc/nginx-unprivileged:1.27-alpine-slim
 
 # Метки
 LABEL project-name="http-file-server"
