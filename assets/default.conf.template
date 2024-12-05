@@ -1,3 +1,7 @@
+types {
+    text/plain zone sh bat;
+}
+
 server {
     set $app_dir /srv/app;
     set $app_dir_layout $app_dir/layout;
