@@ -38,5 +38,6 @@ services:
     # volumes:
     #   - /srv/http-file-server/:/srv/app/public/:ro
     # environment:
-    #   BASE_URL: files.local
+    #   LOG_ACCESS: off
+    #   BASE_URL: ftp.ru
 ```
