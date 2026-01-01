@@ -3,6 +3,8 @@ types {
 }
 
 server {
+    access_log $LOG_ACCESS;
+
     set $app_dir /srv/app;
     set $app_dir_layout $app_dir/layout;
 
@@ -28,25 +30,25 @@ server {
         fancyindex_footer /layout/footer.html;
         # fancyindex_css_href /layout/styles/style.css local; # Не работает
         try_files $uri $uri/ =404;
+    }
 
-        location ~* "^/#hidden/$" {
-            autoindex off;
-            fancyindex off;
-        }
+    location ~ "/_hidden/" {
+        autoindex off;
+        fancyindex off;
+    }
 
-        location ~* "^/#private/$" {
-            autoindex off;
-            fancyindex off;
-            deny all;
-            return 403;
-        }
+    location ~ "/_private/" {
+        autoindex off;
+        fancyindex off;
+        deny all;
+        return 403;
+    }
 
-        location ~* "^/#recycle/$" {
-            autoindex off;
-            fancyindex off;
-            deny all;
-            return 403;
-        }
+    location ~ "/#recycle/" {
+        autoindex off;
+        fancyindex off;
+        deny all;
+        return 403;
     }
 
     location /layout {
