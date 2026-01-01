@@ -208,7 +208,9 @@ document.addEventListener("DOMContentLoaded", () => {
     : idAutoindexTable + " tbody tr"
 
   // Удалить строку таблицы, содержащую ссылку с искомой фразой
-  removeElement(rowTableList, "#Hidden/")
+  removeElement(rowTableList, "#recycle/")
+  removeElement(rowTableList, "_private/")
+  removeElement(rowTableList, "_hidden/")
 
   // Перенос текста заголовка в шапку
   breadcrumb()
