@@ -78,6 +78,7 @@ COPY --chown=101:0 ./assets/autoindex /srv/app
 
 # Разрешить доступ используя любое целевое имя домена или ip-адрес
 # Рекомендуется заменить при разворачивании контейнера
+ENV LOG_ACCESS="off"
 ENV BASE_URL='~. ""'
 
 USER nginx
