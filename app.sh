@@ -4,7 +4,7 @@ set -eu
 # Переменные
 DEVELOPER="aligotr"
 PROJECT_NAME="http-file-server"
-VERSION="1.0.1"
+VERSION="1.0.2"
 CONTAINER_ID=""
 
 # Функции сборки
